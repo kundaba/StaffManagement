@@ -1,0 +1,57 @@
+﻿
+<div class="modal fade" id="timesheetHoursModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 65% !important;">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h4 class="modal-title" style="margin-bottom: 25px"><u>Timesheet hours form </u></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row col-12">
+                    <div class="col-md-12">
+                    <div class="row">
+                        <p class="col-md-3 col-form-label">
+                            Employee Code
+                            <span class="text-danger">*</span>
+                        </p>
+                        <div class="col-md-9">
+                            <div class="form-group has-default">
+                                <input type="text" class="form-control" id="empCode" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-3 col-form-label">
+                            Date Worked
+                            <span class="text-danger">*</span>
+                        </p>
+                        <div class="col-md-9">
+                            <div class="form-group has-default">
+                                <input type="text" class="form-control" id="date" placeholder="Enter date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="col-md-3 col-form-label">
+                            Hours
+                            <span class="text-danger">*</span>
+                        </p>
+                        <div class="col-md-9 ">
+                            <div class="form-group has-default">
+                                <input type="number" class="form-control" id="numberOfHours" min="1" placeholder="Enter no. of hours">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect mr-2  btn-sm " onclick="submitTimesheetHours()"> Save </button>
+                <button type="button" class="btn btn-danger waves-effect mr-2  btn-sm" data-dismiss="modal">Close </button>
+            </div>
+        </div>
+    </div>
+</div>
+

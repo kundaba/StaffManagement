@@ -1,0 +1,117 @@
+﻿
+
+<div class="modal fade" id="disciplinaryCaseSubmissionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:75% !important;">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px"><b><u> Disciplinary Case Submission Form </u></b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group bmd-form-group is-filled">
+                    <div class="row col-12">
+                        
+                        <!----first half--->
+                        <div class="col-md-6">
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Employee Number
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <input type="text" class="form-control employeeCode" id="search" style="text-transform:uppercase;text-align:left" placeholder="Enter employee number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Date offence committed
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <input type="text" class="form-control " id="dateOfOffence" placeholder="Enter date of offence">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Case Type
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <select id="caseType" class="selectpicker form-control" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                                        <option disabled selected>Select Case </option>
+                                        <option value="Late Coming">Late Coming </option>
+                                        <option value="Absenteeism">Absenteeism </option>
+                                        <option value="Theft">Theft of company property </option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!----second half--->
+                        <div class="col-md-6">
+
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Category
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <select id="category" class="selectpicker form-control" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                                            <option disabled selected>Select Category </option>
+                                            <option value="Category 1">Category 1 </option>
+                                            <option value="Category 2">Category 2 </option>
+                                            <option value="Category 3">Category 3 </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Outcome
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <select id="caseOutcome" class="selectpicker form-control" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                                            <option disabled selected>Select Outcome </option>
+                                            <option value="Verbal Warning">Verbal Warning </option>
+                                            <option value="Written Warning">Written Warning </option>
+                                            <option value="Suspension">Suspension </option>
+                                            <option value="Dismissal">Dismissal </option>
+                                        </select>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><br>
+                    <!-----text area------>
+                    <div class="col-sm-12 col-lg-12">
+                        <p>
+                            Case Description(Details) <span class="text-danger">*</span>
+                            <textarea id ="caseDescription" minlength="20" maxlength="200" class="form-control"  cols="500" >                                                                                      
+                         </textarea>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect mr-2   btn-sm" onclick="submitDisciplinaryCase()"> Submit </button>
+                <button type="button" class="btn btn-danger  waves-effect mr-2  btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

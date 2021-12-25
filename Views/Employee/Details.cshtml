@@ -1,0 +1,407 @@
+﻿@model CDFStaffManagement.Model.EntityModels.EmployeeDetail
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .form-control{
+    text-transform: capitalize;
+   }
+</style>
+<link href="~/bootstrap/normalbootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<div class="wizard-container">
+<div class="card card-wizard" data-color="blue" id="wizardProfile">
+<form action="#" method="post">
+<div class="mr-auto">
+    <div class="dropdown-primary dropdown">
+        <a asp-action="Index" asp-controller="Employee">
+            <button type="button" class="button btn btn-info btn-md btn-sm pull-right" data-toggle="modal">
+                <i class="fa fa-arrow-circle-left"></i>Back
+            </button>
+        </a>
+        <button class="btn btn-primary btn-sm dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons">build</i>Actions </button>
+        <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+            <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect  amendmentButton"><i class="material-icons">edit</i>Amend Personal Details</a>
+            <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect  linkEmployeeToPositionBtn" onclick="loadLinkToPositionModal()"><i class="material-icons">add</i> Link employee to position </a>
+            <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect  transferBtn" onclick="loadPromotionModal()"><i class="fa fa-history"></i> Promotion/Transfer </a>
+            <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect terminationBtn" onclick="loadTerminationModal()"><i class="fa fa-file-pdf-o"></i> Terminate </a>
+            <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect reinstateBtn" onclick="reinstateEmployee()"><i class="fa fa-file-pdf-o"></i> Re-instate </a>
+        </div>
+    </div>
+</div>
+<div class="card-header text-center">
+    <h5 class="card-title">
+        Employee Details
+    </h5>
+
+</div>
+<div class="wizard-navigation">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link active" href="#personalInfo" data-toggle="tab" role="tab">
+                Personal Details
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#jobDetails" data-toggle="tab" role="tab">
+                Job Details
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#contactDetails" data-toggle="tab" role="tab">
+                Contact Details
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#qualifications" data-toggle="tab" role="tab">
+                Supporting Docs
+            </a>
+        </li>
+
+    </ul>
+</div>
+<div class="card-body">
+<div class="tab-content">
+
+<!------PERSONAL DETAILS------>
+<div class="tab-pane active" id="personalInfo">
+    <div class="row">
+        <!-----FIRST HALF------->
+        <div class="col-sm-6">
+            <div class="row">
+                <label class="col-md-3 col-form-label">EmployeeCode : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control employeeCode" value="@Model.EmployeeCode" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">First Name : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control firstName" value="@Model.FirstName" style="text-transform: capitalize" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Second Name : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control secondName" value="@Model.MiddleName" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Last Name : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control lastName" value="@Model.LastName" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Gender : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control gender" value=" @Model.Gender" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Leave Start Date : </label>
+                <div class="col-md-9">
+                    <div class="form-group input-group">
+                        <input type="text" class="form-control leaveStartDate" value=" @Model.LeaveStartDate" readonly>
+                        <button class="btn btn-outline-secondary btn-md" type="button" onclick="getLeaveEntitlementDetails()">
+                            <i class="fa fa-history"></i>
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-----SECOND HALF------->
+        <div class="col-sm-6">
+            <div class="row">
+                <label class="col-md-3 col-form-label">Date of Birth : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control dateOfBirth" value="@Model.BirthDate" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">ID Type : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control idType" value="@Model.IdType" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">National ID : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control idNumber" value="@Model.IdNumber" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label ">Nationality : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control nationality" value="@Model.Nationality" readonly>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Status : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control status" value="@Model.EmployeeStatus" readonly>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Pension Start Date : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control status" value="@Model.PensionStartDate" readonly>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-----JOB DETAILS------->
+<div class="tab-pane" id="jobDetails">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <label class="col-md-3 col-form-label">Date Engaged : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control engagementDate" value="@Model.DateEngaged" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Termination Date : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control terminationDate" value=" @Model.TerminationDate" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Job Title : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control jobTitle" value="@Model.JobTitle" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Position Code : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control position" id="position" value="@Model.PositionCode" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Grade : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control jobGrade" value="@Model.JobGrade" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <label class="col-md-3 col-form-label">Staff Category : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control jobGeneral" value="@Model.JobGeneral" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Contract Type : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control contractType" value="@Model.NatureOfContract " readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Department : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control department" value="@Model.Department" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Basic Pay : </label>
+                <div class="col-md-9">
+                    <div class="form-group input-group">
+                        <input type="text" class="form-control" id="basicPay" value="@Model.BasicPay" readonly>
+                        <button class="btn btn-outline-secondary btn-md" type="button" id="basicPayHistoryBtn">
+                            <i class="fa fa-history"></i>
+                            View History
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label"> </label>
+                <div class="col-md-9">
+                    <div class="form-group input-group">
+                        <button class="btn btn-outline-primary btn-sm form-control" type="button" id="bankDetailsBtn">
+                            <i class="fa fa-bank"></i>
+                            View Bank Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-----CONTACT DETAILS------->
+<div class="tab-pane" id="contactDetails">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <label class="col-md-3 col-form-label">Phone Number : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control cellPhoneNumber" value="@Model.CellPhoneNumber" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Email Address : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control emailAddress" value=" @Model.EmailAddress" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Physical Address : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control physicalAddress" value="@Model.PhysicalAddress " readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <label class="col-md-3 col-form-label">Social Security No: </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control socialSecurityNumber" value="@Model.SocialSecurityNumber" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Marital Status : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control maritalStatus" value="@Model.MaritalStatus " readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 col-form-label">Work Address : </label>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control workAddress" value="LUSAKA" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-----QUALIFICATION DETAILS------->
+<div class="tab-pane" id="qualifications">
+    <div class="row col-lg-12">
+        <div>
+            <button type="button" class="button btn btn-outline-info btn-md btn-sm pull-right" data-toggle="modal" onclick="loadQualificationUploadModal()">
+                <i class="material-icons">add</i>Update Qualification
+            </button>
+        </div>
+        <br/>  <br/>
+        <div class="row col-lg-12">
+            <div class="col-md-12">
+                <table id="datatable" class="datatables table-striped col-lg-12" data-order='[[ 0, "desc" ]]' >
+                    <thead>
+                    <tr class="bg-grey">
+                        <th class="d-none"> Guid </th>
+                        <th> Qualification Type </th>
+                        <th> Field of study </th>
+                        <th> Date of issue </th>
+                        <th> Expiry date </th>
+                        <th> Status </th>
+                        <th> Download </th>
+                    </tr>
+                    </thead>
+                    <tbody class="qualificationDocumentsTbody">
+              
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+<div class="card-footer">
+    <div class="mr-auto">
+        <input type="button" class="btn btn-previous btn-fill btn-rose btn-sm btn-wd disabled" name="previous" value="Previous">
+    </div>
+    <div class="ml-auto">
+        <input type="button" class="btn btn-next btn-fill btn-info btn-sm btn-wd" name="next" value="Next">
+    </div>
+</div>
+</form>
+</div>
+</div>
+
+<partial name="PartialViews/EmployeeAmendmentPartial"/>
+<partial name="PartialViews/BasicPayHistoryPartial"/>
+<partial name="PartialViews/EmployeePromotionPartial"/>
+<partial name="PartialViews/EmployeeToPositionPartial"/>
+<partial name="PartialViews/BankDetailsByEmployee"/>
+<partial name="PartialViews/QualificationsUploadPartial"/>
+<partial name="PartialViews/LeaveDetailPartial"/>
+
+<script src="~/jquery/jquery.js"></script>
+<script src="~/bootstrap/normalbootstrap/js/bootstrap.js"></script>
+<script src="~/CustomJS/LookupData.js"></script>
+<script src="~/CustomJS/employee/initializeEmployeeDetailsView.js"></script>
+<script src="~/CustomJS/employee/employeeAmendment.js"></script>
+<script src="~/CustomJS/employee/employeePromotion.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/angularjs/angular.js"></script>
+<script src="~/CustomJS/employee/basicPayHistory.js"></script>
+<script src="~/CustomJS/employee/employeeTermination.js"></script>
+<script src="~/CustomJS/employee/getBankDetailsByEmployeeCode.js"></script>
+<script src="~/CustomJS/employee/qualificationDocuments.js"></script>
+<script src="~/CustomJS/leaveManagement/leaveEntitlementDetails.js"></script>

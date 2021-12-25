@@ -1,0 +1,293 @@
+﻿@model IEnumerable<CDFStaffManagement.Services.Parameters.JobTitles>
+@{
+    ViewData["Title"] = "JobTitles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/bootstrap/normalbootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">Job Titles</h5>
+
+                </div>
+                <div class="card-body col-md-12">
+                    <div class="">
+                        <button type="button" value="Add" rel="tooltip" class="button btn btn-info btn-sm pull-right" data-toggle="modal" onclick="addNewJobTitle()">
+                            <i class="material-icons">add</i>New Job title
+                        </button>
+                    </div><br>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table  table-striped" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr class="">
+                                <th class="ID d-none"> ID </th>
+                                <th> JobCode </th>
+                                <th> Short Description </th>
+                                <th> Long Description </th>
+                                <th> Grade </th>
+                                <th> Status </th>
+                                <th>
+                                    <center> Actions </center>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="tblRow">
+                                    <td class="d-none">
+                                        @Html.DisplayFor(modelItem => item.JobTitleId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.JobCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShortDescription)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LongDescription)
+                                    </td> 
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.JobGrade)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons">build</i>Actions </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                            <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect EditBtn" onclick="editJobTitle($(this))"><i class="material-icons">edit</i>Edit Details</a>
+                                            @if (item.Status!.Equals("Active"))
+                                            {
+                                                <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect" onclick="loadCreatePositionModal($(this))"><i class="material-icons">add</i> Create New Position </a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADD AND EDIT JOB TITLE MODAL -->
+            <div class="modal fade" id="AddEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="max-width: 60% !important;">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title" style="margin-bottom: 25px">
+                                <b class="modalTitle"> </b>
+                            </h5>
+                            <h5 class="JobTitleId" style="display:none"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="material-icons text-danger">clear</i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row col-12">
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <p class="col-md-3 col-form-label">
+                                            JobCode
+                                            <span class="text-danger">*</span>
+                                        </p>
+                                        <div class="col-md-9">
+                                            <div class="form-group has-default">
+                                                <input type="text" class="form-control JobCode" minlength="4" maxlength="4" onchange="validateJobCode()" placeholder="Enter job code" style="text-transform: uppercase">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="col-md-3 col-form-label">
+                                            Short description
+                                            <span class="text-danger">*</span>
+                                        </p>
+                                        <div class="col-md-9">
+                                            <div class="form-group has-default">
+                                                <input type="text" class="form-control ShortDescription" maxlength="20" placeholder="Enter short description">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="col-md-3 col-form-label">
+                                            Long description
+                                            <span class="text-danger">*</span>
+                                        </p>
+                                        <div class="col-md-9">
+                                            <div class="form-group has-default">
+                                                <input type="text" class="form-control LongDescription" placeholder="Enter long description">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row gradeDiv">
+                                        <p class="col-md-3 col-form-label">
+                                            Grade
+                                            <span class="text-danger">*</span>
+                                        </p>
+                                        <div class="col-md-9">
+                                            <div class="form-group has-default">
+                                                <select id="grade" class="selectpicker form-control grade" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                                                    <option disabled selected>Select Grade </option>
+                                                </select>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <p class="col-md-3 col-form-label">
+                                            <span class="text-danger"></span>
+                                        </p>
+                                        <div class="col-md-9">
+                                            <div class="form-group has-default">
+                                                <select class=" form-control selectpicker Status" id="Status">
+                                                    <option value="" selected> Select Status</option>
+                                                    <option value="A"> Active </option>
+                                                    <option value="I"> Inactive </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success waves-effect mr-2 btn-sm SubmitBtn">Add</button>
+                                <button type="button" class="btn btn-success  waves-effect mr-2 btn-sm submitEditedRecordBtn">Edit</button>
+                                <button type="button" class="btn btn-danger waves-effect mr-2 btn-sm" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--- CREATE POSITION CODE MODAL --->
+<div class="modal fade" id="CreatePositionCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:75% !important;">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px"><b><u> Position Code Creation Form </u></b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group bmd-form-group is-filled">
+                    <div class="row col-12">
+                        
+                        <!----first half--->
+                        <div class="col-md-6">
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Job Code
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <input type="text" class="form-control " id="jobTitleCode" style="text-transform:uppercase;text-align:left" placeholder="enter department code" readonly>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Short Description
+                                    <span class="text-danger"></span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <input type="text" class="form-control" id="shortDescription" placeholder="Enter short description" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Long Description
+                                    <span class="text-danger"></span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <input type="text" class="form-control" id="longDescription" placeholder="Enter long description" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!----second half--->
+                        <div class="col-md-6">
+
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Number of Positions
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <input type="number" class="form-control" id="numOfPositionCodes" onkeyup="createPositionCodes()" placeholder="Enter number of positions" min="1" max="20" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Department
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <select id="department" class="selectpicker form-control" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                                            <option disabled selected>Select Department </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Reports To
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9 searchDiv">
+                                    <div class="form-group has-default">
+                                        <input type="text" class="form-control allPositionCodes reportsToPositionCode" id="reportsToPositionCode" placeholder="Enter reports to position" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-----text area------>
+                    <div class="col-sm-12 col-lg-12">
+                        <p class="positionCodeLabel" style="display: none">
+                            Position Code(s) <span class="text-danger">*</span>
+                            <textarea id ="positionCodes" maxlength="90" class="form-control"  cols="500" readonly>                                                                                      
+                         </textarea>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect mr-2   btn-sm addPositionCodesBtn"  style="display: none" onclick="submitCreatedPositionCodes()">Submit</button>
+                <button type="button" class="btn btn-danger  waves-effect mr-2  btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/jquery/jquery.js"></script>
+<script src="~/bootstrap/normalbootstrap/js/bootstrap.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/CustomJS/JobTitles.js"></script>
+<script src="~/CustomJS/positionCodes/createPositionCodes.js"></script>
+<script src="~/CustomJS/LookupData.js"></script>

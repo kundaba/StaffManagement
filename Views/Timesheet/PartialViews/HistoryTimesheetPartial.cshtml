@@ -1,0 +1,46 @@
+﻿
+<div class="modal fade" id="timesheetHistoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 75% !important;">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h4 class="modal-title" style="margin-bottom: 25px"><u>History Timesheets </u></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row col-12">
+                    <div class="col-md-12">
+                        <table>
+                            <tr>
+                                <td><input type="text" class="form-control datepicker form" id="startDate" placeholder="Date from"/></td>
+                                <td><input type="text" class="form-control datepicker form" id="endDate" placeholder="Date to"/></td>
+                                <td><button type="button" class="btn btn-success waves-effect mr-2  btn-sm" onclick="getHistoryData()"> Load Data </button></td>
+                            </tr>
+                        </table>
+                  <br />
+                    <table id="datatable"  class="table  table-hover datatable" data-order='[[ 0, "desc" ]]' style="width:100%; margin-left:10px; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr>
+                                <th> Employee No. </th>
+                                <th> First Name </th>
+                                <th> Last Name </th>
+                                <th> Hours Worked</th>
+                                <th> Date Worked </th>
+                                <th> D. Submitted </th>
+                                <th> Status </th>
+                            </tr>
+                            </thead>
+                            <tbody class="tblBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect mr-2  btn-sm" data-dismiss="modal">Close </button>
+            </div>
+        </div>
+    </div>
+</div>
+

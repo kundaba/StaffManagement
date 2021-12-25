@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Configurations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content" ng-app="myapp" ng-controller="napsaConfigurationsController">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">NAPSA Configurations</h5>
+
+                </div>
+                <div class="card-body">
+                    <div class="col-md-3">
+                       <input type="text" class="form-control" ng-model="search.$" placeholder="Search"> 
+                    </div>
+                    <br>
+                    <div class="material-datatables">
+                        <table id="" class="table table-striped" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr class="">
+                                <th> Percentage </th>
+                                <th>Ceiling(ZMW) </th>
+                                <th>Start Date </th>
+                                <th>End Date </th>
+                                <th>Sub. Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in result | filter:search">
+                                <td>{{item.percentage}}</td>
+                                <td>{{item.maximumCeiling}}</td>
+                                <td>{{item.startDate}}</td>
+                                <td>{{item.endDate}}</td>
+                                <td>{{item.createdDate}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/jquery/jquery.js"></script>
+<script src="~/angularjs/angular.js"></script>
+<script>
+       let myapp = angular.module('myapp', []);
+       
+       myapp.controller('napsaConfigurationsController', function ($scope,$http){
+           
+           $http.post('/NapsaConfiguration/TestConfigurations').then(function (response){
+               console.log(response.data);
+               $scope.result = response.data;
+           }, function errorCallback(error){
+               console.log(error);
+           });
+       });
+       
+</script>

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<CDFStaffManagement.Services.Parameters.Branch>
+@{
+    ViewData["Title"] = "BankBranch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">Branches</h5>
+
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        <button type="button" value="Add" rel="tooltip" class="button btn btn-info btn-sm pull-right" data-toggle="modal">
+                            <i class="material-icons">add</i>New Record
+                        </button>
+                    </div>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table table-striped" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr class="">
+                                <th>Code</th>
+                                <th>Branch </th>
+                                <th>Bank </th>
+                                <th>Status </th>
+                                <th>
+                                    <center> Action </center>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BranchCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BranchName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BankName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <button type="button" rel="tooltip" class="button btn btn-success btn-sm editBtn" value="Edit" title="Edit">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                        </center>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!--AddEditModal -->
+            <div class="modal fade" id="AddEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title" style="margin-bottom: 25px">
+                                <b class="modalTitle"> </b>
+                            </h5>
+                            <h4 class="BankId" style="display:none"></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="material-icons">clear</i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group bmd-form-group is-filled">
+                                <label class="label-control"> Branch Code </label>
+                                <input type="number" class="form-control BranchCode" min="0" minlength="6" maxlength="6" style="text-transform:uppercase;text-align:left">
+                                <br>
+                                <label class="label-control">Branch name </label>
+                                <input type="text" class="form-control BranchName">
+                                <br>
+                                 <label class="label-control"> Bank </label>
+                                <select class=" form-control  BankName" data-live-search="true" id="BankName">
+                                      <option value="" disabled selected> Select Bank</option>
+                                </select>
+                                <select class=" form-control selectpicker Status" id="Status">
+                                    <option value="" selected> Select Status</option>
+                                    <option value="A"> Active </option>
+                                    <option value="I"> Inactive </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success waves-effect mr-2 btn-sm SubmitBtn">Add</button>
+                            <button type="button" class="btn btn-success waves-effect mr-2 btn-sm EditModalBtn">Edit</button>
+                            <button type="button" class="btn btn-danger waves-effect mr-2 btn-sm" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/jquery/jquery.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/CustomJS/BankBranch.js"></script>

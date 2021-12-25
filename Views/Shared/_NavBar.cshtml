@@ -1,0 +1,50 @@
+﻿
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-absolute fixed-top " style="margin-top:0px">
+    <div class="container-fluid">
+        <div class="navbar-wrapper">
+            <div class="navbar-minimize">
+                <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                    <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                    <div class="ripple-container"></div>
+                </button>
+            </div>
+            <a class="navbar-brand" href="#"></a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <i class="material-icons fa fa-user" style="font-size:medium;color:green"> </i>
+                    @{
+                        string welcomeMessage = "";
+                        DateTime currentTime = DateTime.Now;
+                        int hourValue = Convert.ToInt32(currentTime.TimeOfDay.ToString()?.Split(':')[0]);
+                        string labelClass = "";
+                        if (hourValue >= 00 && hourValue <= 11)
+                        {
+                            welcomeMessage = "Good Morning";
+                            labelClass = "text-rose";
+                        }
+                        if (hourValue >= 12 && hourValue <= 17)
+                        {
+                            welcomeMessage = "Good Afternoon";
+                            labelClass = "text-rose";
+                        }
+                        if (hourValue >= 18 && hourValue <= 23)
+                        {
+                            welcomeMessage = "Good Evening";
+                            labelClass = "text-primary";
+                        }
+                    }
+                    <label class="@labelClass">@welcomeMessage </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

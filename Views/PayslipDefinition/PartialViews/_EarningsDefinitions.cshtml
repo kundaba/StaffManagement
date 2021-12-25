@@ -1,0 +1,45 @@
+﻿
+<div class="modal fade" id="EarningDefModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 65% !important;">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h4 class="modal-title">
+                    <b class="modalTitle"> ADD EARNING LINE(S) FOR - </b>
+                    <b class="employeeName" style="text-transform: uppercase"></b>
+                </h4><br />
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                     <table>
+                         <tr>
+                             <td><input type="file" class="form-control earningLinesFile" name="earningsFileUpload" id="file" placeholder="select file" required /></td>
+                             <td><input type="button" class="form-control btn btn-info btn-sm" id="uploadBtn" value="Upload File" onclick="uploadFile(1)"/></td>
+                         </tr>
+                     </table>
+                 </div><br/>
+                
+                <table id="earningsDatatable" class="table  table-hover table-borderless" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:Georgia, 'Times New Roman', Times, serif">
+                    <thead>
+                    <tr class="">
+                        <th>Code</th>
+                        <th>Description </th>
+                        <th>Type</th>
+                        <th>Frequency</th>
+                        <th><center>Value </center></th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbodyEarningLines">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-md mr-2 SubmitButton">Add</button>
+                <button type="button" class="btn btn-danger btn-md mr-2" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

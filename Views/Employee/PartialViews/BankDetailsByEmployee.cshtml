@@ -1,0 +1,132 @@
+﻿
+<div class="modal fade" id="bankDetailsModal" tabindex="-1" ng-app="bankDetailsApp" ng-controller="bankDetailsController">
+    <div class="modal-dialog modal-lg" style="max-width: 70% !important;" role="document">
+        <div class="modal-content mb-5">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px">
+                    <u>Bank Details </u><span ></span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-danger">&times;</span>
+                </button>
+                <hr/>
+            </div>
+
+            <div class="modal-body p-b-0 mb-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="wizard" id="app-s7">
+                            <section>
+                                <form class="wizard-form" id="application-form">
+                                    <fieldset>
+                                        <div class="row">
+                                            <table class="table bankDetailsTable table-striped col-lg-12" data-order='[[ 0, "desc" ]]' style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                                                <thead>
+                                                <tr class="bg-grey">
+                                                    <th> Bank </th>
+                                                    <th> Branch </th>
+                                                    <th> B. Code </th>
+                                                    <th> Acc. Name </th>
+                                                    <th> Acc. Number </th>
+                                                    <th> Status </th>
+                                                    <th> Default </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="bankDetailsTbody">
+                                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-lg-end">
+                <button type="button" class="btn btn-outline-success waves-effect mr-2 btn-sm" onclick="loadAdditionalBankAccountModal()" > Add Another Account </button>
+                <button type="button" class="btn btn-danger waves-effect mr-2 btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---------Additional Bank Account Modal-------->
+<div class="modal fade" id="additionalBankAccountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 60% !important;">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px">
+                    <u> Additional Bank Account Form </u>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row col-lg-12">
+                    <!----first half---->
+                        <div class="col-md-6">
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Account Name
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <input type="text" class="form-control " id="accountName" required placeholder="Enter account name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Account Number
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <input type="number" min="1" minlength="6" maxlength="15" class="form-control " id="accountNumber" placeholder="Enter account number" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!----second half---->
+                        <div class="col-md-6">
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Bank
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <select class="selectpicker form-control bank" name="bankName" id="bank" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                                            <option disabled selected> Select Bank </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Branch
+                                    <span class="text-danger">*</span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <select class="selectpicker form-control branch" name="branch" id="branch" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                                            <option disabled selected>Select Branch </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect mr-2  btn-sm SubmitBtn" onclick="addNewBankDetails()"> Submit </button>
+                <button type="button" class="btn btn-danger waves-effect mr-2  btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

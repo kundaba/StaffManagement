@@ -1,0 +1,258 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/bootstrap/normalbootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">Employee Finder</h5>
+
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        <button type="button" class="btn rounded btn-inverse btn-primary f-right"
+                                data-toggle="modal" data-target="#finder-modal">
+                            <i class="icofont icofont-search-alt-2"></i>
+                            Open Finder
+                        </button>
+                    </div>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table  table-hover table-striped" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr>
+                                <th> Entity Code </th>
+                                <th>Employee Code</th>
+                                <th>Name </th>
+                                <th>Status </th>
+                                <th>
+                                    <center> Action </center>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal starting  -->
+<div class="modal fade" id="finder-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" style="max-width: 60% !important;" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h3 class="modal-title" style="margin-bottom: 25px">Employee Finder</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-danger">&times;</span>
+                </button>
+                <hr/>
+            </div>
+            <div class="modal-body p-b-10">
+                <div class="col finder">
+                    <div class="row mt-3">
+                        <div class="col-md-2">
+                            <p class="font-weight-bold">Field</p>
+                            <p>Eng. Date</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="font-weight-bold">Criteria</p>
+                            <select class="form-control selectpicker operation">
+                                <option selected disabled> Select Operation </option>
+                                <option value="="> Equals </option>
+                                <option value=">"> Greater Than </option>
+                                <option value=">="> Greater or Equal</option>
+                                <option value="<"> Less Than </option>
+                                <option value="<="> Less or Equal </option>
+                                <option value="Contains"> Like </option>
+                    
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="font-weight-bold">Value 1</p>
+                            <input class="form-control" type="date" v-model="searchObj.regDate.value">
+                        </div>
+                        <div class="col-md-3">
+                            <p class="font-weight-bold">Value 2</p>
+                            <input class="form-control" type="date" v-model="searchObj.regDate.value2"
+                                   :disabled="!showSecondOpt(searchObj.regDate.op)">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-2">
+                            <p>Employee Code</p>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control selectpicker operation">
+                                <option selected disabled> Select Operation </option>
+                                <option value="="> Equals </option>
+                                <option value=">"> Greater Than </option>
+                                <option value=">="> Greater or Equal</option>
+                                <option value="<"> Less Than </option>
+                                <option value="<="> Less or Equal </option>
+                                <option value="Contains"> Like </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" id="employeeCode">
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-2">
+                            <p>First Name</p>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control selectpicker operation">
+                                <option selected disabled> Select Operation </option>
+                                <option value="="> Equals </option>
+                                <option value=">"> Greater Than </option>
+                                <option value=">="> Greater or Equal</option>
+                                <option value="<"> Less Than </option>
+                                <option value="<="> Less or Equal </option>
+                                <option value="Contains"> Like </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" v-model="searchObj.firstName.value">
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-2">
+                            <p>Last Name</p>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control selectpicker operation">
+                                <option selected disabled> Select Operation </option>
+                                <option value="="> Equals </option>
+                                <option value=">"> Greater Than </option>
+                                <option value=">="> Greater or Equal</option>
+                                <option value="<"> Less Than </option>
+                                <option value="<="> Less or Equal </option>
+                                <option value="Contains"> Like </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" v-model="searchObj.lastName.value">
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-2">
+                            <p>Mobile Number</p>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control selectpicker operation">
+                                <option selected disabled> Select Operation </option>
+                                <option value="="> Equals </option>
+                                <option value=">"> Greater Than </option>
+                                <option value=">="> Greater or Equal</option>
+                                <option value="<"> Less Than </option>
+                                <option value="<="> Less or Equal </option>
+                                <option value="Contains"> Like </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" v-model="searchObj.mobileNumber.value">
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" disabled id="mobileNumber">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-2">
+                            <p>National ID</p>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control selectpicker operation">
+                                <option selected disabled> Select Operation </option>
+                                <option value="="> Equals </option>
+                                <option value=">"> Greater Than </option>
+                                <option value=">="> Greater or Equal</option>
+                                <option value="<"> Less Than </option>
+                                <option value="<="> Less or Equal </option>
+                                <option value="Contains"> Like </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" id="nationalId">
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" id="nationalId" disabled>
+                        </div>
+                    </div>
+    
+    
+                    <div class="row mt-3">
+                        <div class="col-md-2">
+                            <p>Status</p>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control selectpicker operation">
+                                <option selected disabled> Select Operation </option>
+                                <option value="="> Equals </option>
+                                <option value=">"> Greater Than </option>
+                                <option value=">="> Greater or Equal</option>
+                                <option value="<"> Less Than </option>
+                                <option value="<="> Less or Equal </option>
+                                <option value="Contains"> Like </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control selectpicker" data-live-search="true" id="status">
+                                <option selected disabled>Select Status</option>
+                                <option value="1">New </option>
+                                <option value="2">Active </option>
+                                <option value="5">Terminated </option>
+                                <option value="6">Re-Instated </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control selectpicker"  data-live-search="true" id="status" disabled>
+                                <option selected disabled>Select Status</option>
+                                <option value="1">New </option>
+                                <option value="2">Active </option>
+                                <option value="5">Terminated </option>
+                                <option value="6">Re-Instated </option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-info btn-sm mr-2 ">Search</button>
+                <button input type="button" class="btn btn-outline-danger btn-sm mr-2 " data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/jquery/jquery.js"></script>
+<script src="~/bootstrap/normalbootstrap/js/bootstrap.js"></script>
+<script src="~/CustomJS/employee/finder.js"></script>
+
+
+

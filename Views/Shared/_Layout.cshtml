@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  HR & Payroll Zambia </title>
+    <link href="~/MDB/css/material-dashboard.minf066.css" rel="stylesheet"/>
+    <link href="~/MDB/css/mdb.css" rel="stylesheet"/>
+    <link href="~/MDB/css/css8393.css" rel="stylesheet"/>
+    <link href="~/font-awesome/css/fontawesome.css" rel="stylesheet"/>
+    <link href="~/font-awesome/css/all.css" rel="stylesheet"/>
+    <link href="~/MDB/css/demo.css" rel="stylesheet"/>
+    <link href="~/MDB/css/Custom.css" rel="stylesheet"/>
+    <link href="~/MDB/css/style.css" rel="stylesheet"/>
+    <link href="~/sweetalert/sweetalert.css" rel="stylesheet"/>
+    <link href="~/jqueryui/jquery-ui.css" rel="stylesheet"/>
+    <link href="~/jqueryui/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="~/vuejs/vue-select.css" rel="stylesheet"/>
+</head>
+<body class="">
+<div>
+    <noscript>
+        <iframe src="#" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <div class="wrapper ">
+        <partial name="_SideBar"/>
+        <div class="main-panel">
+            <partial name="_NavBar"/>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="container body-content">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted text-info">
+        <div class="container">
+            &copy;
+            <b>
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>- HR & Payroll Zambia <a asp-area="" asp-controller="Home" asp-action="Index"></a>
+            </b>
+        </div>
+    </footer>
+</div>
+
+<script src="~/jquery/jquery.js"></script>
+<script src="~/jqueryui/jquery-ui.js"></script>
+<script src="~/MDB/js/popper.min.js"></script>
+<script src="~/MDB/js/bootstrap-material-design.min.js"></script>
+<script src="~/MDB/js/perfect-scrollbar.jquery.min.js"></script>
+@*<script src="~/MDB/js/material-dashboard.minf066.js"></script>*@
+<script src="~/MDB/js/mdb.js"></script>
+<script src="~/MDB/js/moment.min.js"></script>
+<script src="~/MDB/js/bootstrap-datetimepicker.min.js"></script>
+<script src="~/font-awesome/js/fontawesome.js"></script>
+<script src="~/font-awesome/js/all.js"></script>
+<script src="~/jqueryui/jquery-ui.js"></script>
+<script src="~/sweetalert/sweetalert.js"></script>
+<script src="~/MDB/js/arrive.min.js"></script>
+<script src="~/MDB/js/bootstrap-notify.js"></script>
+<script src="~/MDB/js/bootstrap-selectpicker.js"></script>
+<script src="~/MDB/js/bootstrap-tagsinput.js"></script>
+<script src="~/MDB/js/buttons.js"></script>
+<script src="~/MDB/js/chartist.min.js"></script>
+<script src="~/MDB/js/jquery.validate.min.js"></script>
+<script src="~/MDB/js/demo.js"></script>
+<script src="~/MDB/js/fullcalendar.min.js"></script>
+<script src="~/MDB/js/jasny-bootstrap.min.js"></script>
+<script src="~/MDB/js/jquery-jvectormap.js"></script>
+<script src="~/MDB/js/jquery.bootstrap-wizard.js"></script>
+<script src="~/MDB/js/jquery.dataTables.min.js"></script>
+<script src="~/MDB/js/jquery.sharrre.js"></script>
+<script src="~/MDB/js/popper.min.js"></script>
+<script src="~/MDB/js/sweetalert2.js"></script>
+<script src="~/CustomJS/GetUserRole.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script src="~/CustomJS/CustomValidations.js"></script>
+<script src="~/CustomJS/datetimepickerInitializer.js"></script>
+<script src="~/CustomJS/Search.js"></script>
+<script src="~/CustomJS/positionCodes/positionCodeAutocompleteSearch.js"></script>
+<script src="~/CustomJS/positionCodes/positionCodeAutocompleteSearch2.js"></script>
+<script src="~/CustomJS/EarningandDeductionLines.js"></script>
+<script src="~/CustomJS/DataTableInitializer.js"></script>
+@*@RenderSection("Scripts", required: true)*@
+
+</body>
+</html>

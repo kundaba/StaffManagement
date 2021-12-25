@@ -1,0 +1,152 @@
+﻿@model IEnumerable<CDFStaffManagement.Services.Parameters.PayrollDeductionLine>
+@{
+    ViewData["Title"] = "DeductionLines";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">Deduction Lines</h5>
+
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        <button type="button" value="Add" rel="tooltip" class="button btn btn-info btn-sm pull-right" data-toggle="modal">
+                            <i class="material-icons">person_add</i>New Record
+                        </button>
+                    </div>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table table-striped" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr class="">
+                                <th class="ID d-none"> ID </th>
+                                <th>Code</th>
+                                <th>Description </th>
+                                <th>Formula </th>
+                                <th>Status </th>
+                                <th><center> Action </center></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="d-none">
+                                        @Html.DisplayFor(modelItem => item.DefId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DeductionCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DeductionDescription)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Formula)
+                                    </td>
+                                        
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <button type="button" rel="tooltip" class="button btn btn-success btn-round btn-sm editBtn" value="Edit" title="Edit">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                        </center>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ADD/EDIT MODAL -->
+            <div class="modal fade" id="AddEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="max-width: 40% !important;">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title" style="margin-bottom: 25px"><b class="modalTitle">  </b></h5>
+                            <h4 class="LineId" style="display:none"></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="material-icons text-danger">clear</i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <p class="col-md-3 col-form-label">
+                                        Code
+                                        <span class="text-danger">*</span>
+                                    </p>
+                                    <div class="col-md-9">
+                                        <div class="form-group has-default">
+                                            <input type="text" class="form-control Code" maxlength="15" style="text-transform:uppercase;text-align:left" placeholder="Enter code">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-3 col-form-label">
+                                        Description
+                                        <span class="text-danger"></span>
+                                    </p>
+                                    <div class="col-md-9">
+                                        <div class="form-group has-default">
+                                            <input type="text" class="form-control Description" placeholder="Enter Description">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-3 col-form-label">
+                                        Formula
+                                        <span class="text-danger">*</span>
+                                    </p>
+                                    <div class="col-md-9">
+                                        <div class="form-group has-default">
+                                            <input type="text" class="form-control formula" placeholder="Enter the formula" onclick="showFormulaCreationModal()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-3 col-form-label">
+                                        <span class="text-danger"></span>
+                                    </p>
+                                    <div class="col-md-9">
+                                        <div class="form-group has-default">
+                                            <select class=" form-control selectpicker Status" id="Status" data-style="select-with-transition">
+                                                <option value="0" selected> Select Status</option>
+                                                <option value="A"> Active </option>
+                                                <option value="I"> Inactive </option>
+                                            </select>
+                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success btn-md mr-2 SubmitBtn">Add</button>
+                            <button type="button" class="btn btn-success btn-md mr-2 EditModalBtn">Edit</button>
+                            <button type="button" class="btn btn-danger btn-md mr-2" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="PartialViews/FormulaCreationPartial" />
+
+<script src="~/jquery/jquery.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/CustomJS/payrollDefinitions/DeductionLines.js"></script>
+<script src="~/CustomJS/payrollDefinitions/CreatePayrollLineFormula.js"></script>

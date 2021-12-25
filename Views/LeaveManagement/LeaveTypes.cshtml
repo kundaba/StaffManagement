@@ -1,0 +1,181 @@
+﻿@model IEnumerable<CDFStaffManagement.Services.LeaveManagement.Dto.LeaveTypesDto>
+
+@{
+    ViewBag.Title = "Leave Types";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/bootstrap/normalbootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">Leave Types </h5>
+
+                </div>
+                <div class="card-body col-md-12">
+                    <div class="">
+                        <button type="button" value="Add" rel="tooltip" class="button btn btn-info btn-sm pull-right" data-toggle="modal" onclick="addLeaveTypeMethods.loadLeaveTypeModal()">
+                            <i class="material-icons">add</i>New Leave Type
+                        </button>
+                    </div><br>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table  table-striped" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr class="">
+                                <th> Code </th>
+                                <th> Description </th>
+                                <th> Entitlement(Days) </th>
+                                <th> Cycle </th>
+                                <th> Gender </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="tblRow">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Code)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LeaveTypeDescription)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Entitlement)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cycle)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ApplicableGender)
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADD LEAVE TYPE MODAL -->
+            <div class="modal fade" id="AddLeaveTypeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="max-width: 70% !important;">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title" style="margin-bottom: 25px">
+                                <b class="modalTitle"><u>Add Leave Type </u></b>
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="material-icons text-danger">clear</i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row col-12">
+                           
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <p class="col-md-3 col-form-label">
+                                                Code
+                                                <span class="text-danger">*</span>
+                                            </p>
+                                            <div class="col-md-9">
+                                                <div class="form-group has-default">
+                                                    <input type="text" class="form-control code" id="code" minlength="4" maxlength="8" placeholder="Enter the code" style="text-transform: uppercase">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-md-3 col-form-label">
+                                                Description
+                                                <span class="text-danger">*</span>
+                                            </p>
+                                            <div class="col-md-9">
+                                                <div class="form-group has-default">
+                                                    <input type="text" class="form-control description" id="description" maxlength="30" placeholder="Enter description">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-md-3 col-form-label">
+                                                Entitlement
+                                                <span class="text-danger">*</span>
+                                            </p>
+                                            <div class="col-md-9">
+                                                <div class="form-group has-default">
+                                                    <input type="number" class="form-control" id="entitlement" min="1" max="200" placeholder="Enter entitlement">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <p class="col-md-3 col-form-label">
+                                            Applicable Gender
+                                            <span class="text-danger">*</span>
+                                        </p>
+                                        <div class="col-md-9">
+                                            <div class="form-group has-default">
+                                                <select class=" form-control selectpicker" id="gender">
+                                                    <option value="" selected> Select Gender</option>
+                                                    <option value="Male"> Male </option>
+                                                    <option value="Female"> Female </option>
+                                                    <option value="All"> All </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <p class="col-md-3 col-form-label">
+                                            Cycle
+                                            <span class="text-danger">*</span>
+                                        </p>
+                                        <div class="col-md-9">
+                                            <div class="form-group has-default">
+                                                <select class=" form-control selectpicker" id="cycle">
+                                                    <option value="" selected> Select Cycle</option>
+                                                    <option value="Monthly"> Monthly </option>
+                                                    <option value="Yearly"> Yearly </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="col-md-3 col-form-label">
+                                            Balance BF Option
+                                            <span class="text-danger">*</span>
+                                        </p>
+                                        <div class="col-md-9">
+                                            <div class="form-group has-default">
+                                                <select class=" form-control selectpicker" id="balanceBroughtForwardOption">
+                                                    <option value="" selected> Select </option>
+                                                    <option value="CarryOver"> Carry Over </option>
+                                                    <option value="ZeroRate"> Zero Rate </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success waves-effect mr-2 btn-sm" onclick="addLeaveTypeMethods.addLeaveType()">Add</button>
+                                <button type="button" class="btn btn-danger waves-effect mr-2 btn-sm" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/jquery/jquery.js"></script>
+<script src="~/bootstrap/normalbootstrap/js/bootstrap.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/CustomJS/leaveManagement/addLeaveType.js"></script>

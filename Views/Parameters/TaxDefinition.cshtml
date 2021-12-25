@@ -1,0 +1,123 @@
+﻿@model IEnumerable<CDFStaffManagement.Services.Parameters.TaxDefinition>
+@{
+    ViewData["Title"] = "TaxDefinition";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/bootstrap/normalbootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">Tax Table </h5>
+
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        <button type="button" value="Add" rel="tooltip" class="button btn btn-info btn-sm pull-right" data-toggle="modal">
+                            <i class="material-icons">add</i>New Record
+                        </button>
+                    </div>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table table-striped" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                                <tr class="">
+                                    <th class="ID d-none" > ID </th>
+                                    <th> Description </th>
+                                    <th> Lower Limit </th>
+                                    <th> Upper Limit </th>
+                                    <th> Amount  </th>
+                                    <th> Percentage </th>
+                                    <th> Status </th>
+                                     <th> Date Modified </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr class="tblRow">
+                                    <td class="d-none">
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BandDescription)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LowerLimit)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UperLimit)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Amount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Percentage)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateCreated)
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="AddEditTaxDefModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="width:700px">
+                        <div class="modal-header bg-info">
+                            <h4 class="modal-title" style="margin-bottom: 25px"><b class="modalTitle">  </b></h4>
+                            <h5 class="Id" style="display:none"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="material-icons">clear</i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group bmd-form-group is-filled">
+                                <label class="label-control">Band Description </label>
+                                <input type="text" class="form-control description" maxlength="100" style="text-align:left">
+                                <br>
+                                <label class="label-control">Lower Limit </label>
+                                <input type="number" class="form-control LowerLimit" min="1">
+                                 <br>
+                                <label class="label-control">Upper Limit </label>
+                                <input type="number" class="form-control UpperLimit" min="1">
+                                 <br>
+                                <label class="label-control">Amount </label>
+                                <input type="number" class="form-control Amount" min="1">
+                                 <br>
+                                <label class="label-control">Percentage </label>
+                                <input type="number" class="form-control Percentage" min="1" max="100">
+                                 <br>
+                                <select class=" form-control selectpicker " id="Status" >
+                                    <option  selected disabled> Select Status</option>
+                                    <option value="A"> Active </option>
+                                    <option value="I"> Inactive </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success  waves-effect mr-2 btn-sm SubmitBtn">Add</button>
+                            <button type="button" class="btn btn-success waves-effect mr-2  btn-sm EditBtn">Edit</button>
+                            <button type="button" class="btn btn-danger waves-effect mr-2  btn-sm" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/jquery/jquery.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/CustomJS/TaxDefinitions.js"></script>
+<script src="~/bootstrap/normalbootstrap/js/bootstrap.js"></script>
+

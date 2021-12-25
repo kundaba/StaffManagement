@@ -1,0 +1,64 @@
+﻿<div class="tab-pane" id="bankDetails">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Account Name:
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control" id="accountName" name="accountName" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">Social Security No. : </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control" id="ssn" name="ssn" min="6" maxlength="15" >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Account Number :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <input type="number" min="0" class="form-control accountNumber" id="accountNumber" name="accountNumber" minlength="13" maxlength="13" onchange="validateAccountNumber($(this).val())" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Bank Name:
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <select class="selectpicker form-control bank" name="bankName" id="bank" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                            <option disabled selected>Select Bank </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Branch :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <select class="selectpicker form-control branch" name="branch" id="branch" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                            <option disabled selected>Select Branch </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

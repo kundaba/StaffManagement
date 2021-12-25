@@ -1,0 +1,214 @@
+﻿@model IEnumerable<CDFStaffManagement.Services.StoredProcedures.UserList>
+
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">User List</h5>
+
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        <button type="button" rel="tooltip" class="btn btn-info btn-sm pull-right">
+                            <a asp-action="SignUp" asp-controller="UserAccount">
+                                <i class="material-icons">person_add</i>New User</a>
+                        </button>
+                    </div>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table  table-hover table-striped" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Century Gothic'">
+                            <thead>
+                                <tr class="">
+                                    <th class="ID d-none"> ID </th>
+                                    <th>Username</th>
+                                    <th>Email Adrress </th>
+                                    <th>User Role </th>
+                                    <th>Status </th>
+                                    <th>Date Created </th>
+                                    <th> Last Logon </th>
+                                    <th><center> Actions </center></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="d-none">
+                                            @Html.DisplayFor(modelItem => item.UserId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Username)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EmailAddress)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.RoleDescription)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProfileStatus)
+                                        </td>
+                                        <td>
+                                            @{
+                                                DateTime d = item.DateCreated;
+                                                string date = d.ToString("MMMM d, yyyy");
+                                            }
+                                            @date
+                                        </td>
+                                        <td>
+                                            @{
+                                                DateTime dat = item.LastLogon;
+                                                string convertedDate = dat.ToString("MMMM d, yyyy");
+                                            }
+                                            @convertedDate
+                                        </td>
+                                        <td>
+                                            @{ 
+                                                string titleMsg = "";
+                                                string classType = "";
+                                                string btnValue = "";
+
+                                                if(item.ProfileStatus == "Active")
+                                                {
+                                                    titleMsg = "Disable";
+                                                    classType = "btn-danger";
+                                                    btnValue = "Disable";
+                                                }
+                                                else
+                                                {
+                                                    titleMsg = "Activate";
+                                                    classType = "btn-info";
+                                                    btnValue = "Activate";
+                                                }
+
+                                            }
+                                            <center>                                         
+                                                <button type="button" rel="tooltip" class="btn btn-success btn-round btn-sm editBtn" title="Edit">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button type="button" rel="tooltip" class="btn @classType btn-round btn-sm  disableActivateBtn" value="@btnValue" title="@titleMsg">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                                </center>
+                                          </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/jquery/jquery.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script>
+    $(document).ready(function () {
+       
+        $(".editBtn").click(function () {
+            let currentRow = $(this).closest('tr');
+            let id = Number($.trim(currentRow.find('td:eq(0)').text()));
+            let currentEmailAdd = $.trim(currentRow.find('td:eq(2)').text());
+            showEditModal(id, currentEmailAdd);
+        });
+        $(".disableActivateBtn").click(function () {
+            let currentRow = $(this).closest('tr');
+            let userId = Number(currentRow.find('td:eq(0)').text());
+            let actionType = $(this).val();
+            confirmDisableActivate(userId,actionType);
+        });
+
+        function showEditModal(userId,currentEmailAddress) {
+            swal({
+                title: 'Enter new details below',
+                html: '<div class="form-group">' +
+                    '<input id="input-field" type="text" class="form-control emailAddress" value ="' + currentEmailAddress+'" placeholder ="Email Address"/><br>' +
+                    '<select class="form-control userRole" style = "border-top:none;border-left:none;border-right:none; font-size:small;font-weight:medium">' +
+                    '<option value ="" selected disabled> Select user Role </option>' +
+                    '<option value =1> Super User </option>' +
+                    '<option value =2> Payroll User </option>' +
+                    '<option value =3> Admin </option>' +
+                    '</select>' +
+                    '</div>',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success modalConfirm',
+                confirmButtonText: 'Submit',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false
+            });
+            $(".modalConfirm").click(function () {
+                let email = $.trim($(".emailAddress").val());
+                let userRole = $(".userRole").val();
+                if (email !== "" && (userRole !== "null" || userRole === "")) {
+
+                    $(".btn-round").prop("disabled", true);
+                    let model = {
+                        UserID: userId,
+                        EmailAddress: email,
+                        UserRole: userRole
+                    };
+                    $.post("/UserManager/EditUserDetail", { model: model })
+                        .done(function (msg) {
+                            alertMessage(msg);                            
+                        })
+                        .fail(function (error) {
+                            console.log(error);
+                        });
+                }
+                else {
+                    alertMessage("Please fill in both fields");
+                }
+
+            });
+        }
+        function confirmDisableActivate(userId, actionType) {
+            swal({
+                title: 'System Response',
+                text: 'Are you sure you want to ' + actionType + ' this user?',
+                type: 'info',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success confirmBtn',
+                cancelButtonClass: 'btn btn-danger',
+                confirmButtonText: actionType,
+                buttonsStyling: false
+            });
+            $(".confirmBtn").click(function () {
+                if (actionType !== "") {
+
+                    $(".btn-round").prop("disabled", true);
+                    $.post("/UserManager/DisableActivateUser", { userID: userId, actionType: actionType })
+                        .done(function (msg) {
+                            alertMessage(msg);
+                        })
+                        .fail(function (error) {
+                            console.log(error);
+                        });
+                }
+                else {
+                    alertMessage("Something went wrong..Please try again");
+                }
+
+            });
+        }
+        function alertMessage(msg) {
+            swal({
+                title: "System Response",
+                text: msg,
+                type:"info",
+                buttonsStyling: false,
+                confirmButtonClass: "btn btn-info okBtn"
+            }).then(function () {
+                window.location.reload(true);
+            });
+        }
+    })
+</script>

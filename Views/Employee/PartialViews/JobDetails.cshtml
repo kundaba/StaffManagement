@@ -1,0 +1,103 @@
+﻿<div class="tab-pane" id="jobDetails">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Date Engaged :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="date" class="form-control" id="engagementDate" name="engagementDate" required max="@DateTime.Now.ToString("yyyy-MM-dd")">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">Termination Date : </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="date" class="form-control" id="terminationDate" name="terminationDate">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Job Title :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <select class="selectpicker form-control jobTitle" name="jobTitle" id="jobTitle" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                            <option disabled selected>Select Job Title </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Grade :
+                    <span class="text-danger"></span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <select class="selectpicker form-control grade" name="grade" id="grade" data-live-search="true" data-style="btn btn-primary btn-sm" >
+                            <option disabled selected>Select Grade</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Job General :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <select class="selectpicker form-control jobGeneral" name="jobGeneral" id="jobGeneral" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                            <option disabled selected>Select Job General</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Contract Type :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <select id="contractType" name="contractType" class="selectpicker form-control contractType" data-style="btn btn-primary btn-sm" required>
+                            <option disabled selected>Contract Type </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Department :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <select id="department" name="department" class="selectpicker form-control department" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                            <option disabled selected>Select Department </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Basic Pay :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="number" min="100" max="1000000" class="form-control basicPay" id="basicPay" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

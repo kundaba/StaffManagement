@@ -1,0 +1,51 @@
+﻿
+<!-- link employee to position modal -->
+<div class="modal fade" id="linkEmployeeToPositionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 65% !important;">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px"><u>Link employee to position </u></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row col-12">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <p class="col-md-3 col-form-label">
+                                Employee Code
+                                <span class="text-danger"></span>
+                            </p>
+                            <div class="col-md-9">
+                                <div class="form-group has-default">
+                                    <input type="text" class="form-control" id="empCode" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <p class="col-md-3 col-form-label">
+                                Position Code
+                                <span class="text-danger">*</span>
+                            </p>
+                            <div class="col-md-9 searchDiv">
+                                <div class="form-group has-default">
+                                    <input type="text" class="form-control allPositionCodes" id="positionCode" placeholder="Enter position code">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect mr-2  btn-sm " onclick="linkToPosition()" >Link Employee</button>
+                <button type="button" class="btn btn-danger waves-effect mr-2  btn-sm" data-dismiss="modal">Close </button>
+            </div>
+        </div>
+    </div>
+</div>
+

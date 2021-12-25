@@ -1,0 +1,124 @@
+﻿
+<!--basic pay history modal--->
+<div class="modal fade" id="basicPayHistoryModal" tabindex="-1" ng-app="myapp" ng-controller="basicPayHistoryController">
+    <div class="modal-dialog modal-lg" style="max-width: 60% !important;" role="document">
+        <div class="modal-content mb-5">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px">
+                    <u>Basic Pay History </u><span id="refNo"></span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-danger">&times;</span>
+                </button>
+                <hr/>
+            </div>
+
+            <div class="modal-body p-b-0 mb-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="wizard" id="app-s7">
+                            <section>
+                                <form class="wizard-form" id="application-form">
+                                    <fieldset>
+                                        <div class="row">
+                                            <table class="table table-striped col-lg-12" data-order='[[ 0, "desc" ]]' style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                                                <thead>
+                                                <tr class="bg-grey">
+                                                    <th> Basic pay </th>
+                                                    <th> Start Date </th>
+                                                    <th> End Date </th>
+                                                    <th> Reason </th>
+                                                    <th> Date Created </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in result">
+                                                    <td>{{item.remunerationAmount}}</td>
+                                                    <td>{{item.startDate | date:'dd MMM yyyy'}}</td>
+                                                    <td>{{item.endDate | date:'dd MMM yyyy'}}</td>
+                                                    <td>{{item.reason}}</td>
+                                                    <td>{{item.dateCreated| date:'dd MMM yyyy'}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-lg-end">
+                <button type="button" class="btn btn-primary waves-effect mr-2 btn-sm basicPayAmendmentBtn" onclick="loadBasicPayAmendmentModal()"> Amend Basic Pay </button>
+                <button type="button" class="btn btn-danger waves-effect mr-2 btn-sm"data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--basic pay amendment modal-->
+
+<div class="modal fade" id="basicPayAmendmentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50% !important;" >
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px">
+                    <u>Basic Pay Amendment Form </u>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row col-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <p class="col-md-3 col-form-label">
+                                New Basic Pay
+                                <span class="text-danger">*</span>
+                            </p>
+                            <div class="col-md-9">
+                                <div class="form-group has-default">
+                                    <input type="number" class="form-control " id="newBasicPay" min="1" required placeholder="Enter new basic pay">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-3 col-form-label">
+                                Start Date
+                                <span class="text-danger">*</span>
+                            </p>
+                            <div class="col-md-9">
+                                <div class="form-group has-default">
+                                    <input type="text" class="form-control " id="startDate" placeholder="select start date" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="col-md-3 col-form-label">
+                                Amendment Reason
+                                <span class="text-danger">*</span>
+                            </p>
+                            <div class="col-md-9">
+                                <div class="form-group has-default">
+                                    <select class=" form-control selectpicker Status" id="reason">
+                                        <option value="" selected> Select Reason </option>
+                                        <option value="Promotion"> Promotion </option>
+                                        <option value="Correction of Basic Pay"> Correction of Basic Pay </option>
+                                        <option value="Allowance"> Allowance </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect mr-2  btn-sm SubmitBtn" onclick="submitAmendedBasicPay()">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect mr-2  btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

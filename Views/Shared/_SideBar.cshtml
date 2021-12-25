@@ -1,0 +1,242 @@
+﻿
+<div class="sidebar" data-color="rose" data-background-color="black" data-image="~/img/login.jpg">
+    <div class="logo" style="margin-left: 20px">
+        <a href="@Url.Action("Index","Home")" class="simple-text logo-normal">
+          HR & Payroll ZAMBIA
+        </a>
+        <a href="@Url.Action("Index","Home")" class="simple-text logo-logo">
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <div class="user">
+            <div class="photo">
+                <img src="~/img/avatar.jpg">
+            </div>
+            <div class="user-info">
+                <label class="userName" style="display:none"> @ViewBag.UserName </label>
+                <a class="" href="@Url.Action("SignOut","UserAccount")">
+                    <span>
+                        <p class="">Hello  @ViewBag.UserName, Logout</p>
+                    </span>
+                </a>
+            </div>
+        </div>
+        <ul class="nav AllOptions" style="display:none">
+            <li class="nav-item ">
+                <a class="nav-link" href="@Url.Action("Index","Home")">
+                    <i class="fa fa-home"></i>
+                    Home
+                </a>
+            </li>
+            <li class="nav-item Employee">
+                <a class="nav-link" data-toggle="collapse" href="#Employee">
+                    <i class="material-icons">people_alt</i>
+                    <p>
+                        Employee Management
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="Employee">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="Index" asp-controller="Employee">
+                                <span class="sidebar-mini"> ED </span>
+                                <span class="sidebar-normal"> Employee Details</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="Finder" asp-controller="EmployeeFinder">
+                                <span class="sidebar-mini"> EF </span>
+                                <span class="sidebar-normal"> Employee Finder </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="Index" asp-controller="DisciplinaryCases">
+                                <span class="sidebar-mini"> DC </span>
+                                <span class="sidebar-normal"> Disciplinary Cases </span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </li>
+            
+            <li class="nav-item PaySlips">
+                <a class="nav-link" data-toggle="collapse" href="#PaySlips">
+                    <i class="material-icons">description</i>
+                    <p>
+                        Payroll Management
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="PaySlips">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="Index" asp-controller="PayslipDefinition">
+                                <span class="sidebar-mini"> PD </span>
+                                <span class="sidebar-normal"> Payslip Definition </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="" asp-controller="">
+                                <span class="sidebar-mini"> PS </span>
+                                <span class="sidebar-normal"> Payslip Details </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="Index" asp-controller="Timesheet">
+                                <span class="sidebar-mini"> TS </span>
+                                <span class="sidebar-normal"> Timesheet </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="" asp-controller="">
+                                <span class="sidebar-mini"> LV </span>
+                                <span class="sidebar-normal"> Leave Management </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item PositionCodes">
+                <a class="nav-link" data-toggle="collapse" href="#PositionCodes">
+                    <i class="material-icons">description</i>
+                    <p>
+                        Position Codes
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="PositionCodes">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="Index" asp-controller="PositionCodes">
+                                <span class="sidebar-mini"> PD </span>
+                                <span class="sidebar-normal"> Position codes </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item UserAdmin">
+                <a class="nav-link" data-toggle="collapse" href="#UserAdmin">
+                    <i class="material-icons">account_circle</i>
+                    <p>
+                        User Admin
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="UserAdmin">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="@Url.Action("UserList","UserManager")">
+                                <span class="sidebar-mini"> UL </span>
+                                <span class="sidebar-normal"> User List </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="pages/rtl.html">
+                                <span class="sidebar-mini"> UR </span>
+                                <span class="sidebar-normal"> User Roles </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item ParameterSetup">
+                <a class="nav-link" data-toggle="collapse" href="#ParameterSetup">
+                    <i class="material-icons">build</i>
+                    <p>
+                        Parameters
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="ParameterSetup">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="JobTitles" asp-controller="Parameters">
+                                <span class="sidebar-mini"> JB </span>
+                                <span class="sidebar-normal"> JobTitles </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="Bank" asp-controller="Parameters">
+                                <span class="sidebar-mini"> BK </span>
+                                <span class="sidebar-normal"> Banks </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="BankBranch" asp-controller="Parameters">
+                                <span class="sidebar-mini"> BR </span>
+                                <span class="sidebar-normal"> Branches </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="Configurations" asp-controller="NapsaConfiguration">
+                                <span class="sidebar-mini"> NC </span>
+                                <span class="sidebar-normal"> Napsa Configuration </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="JobGrade" asp-controller="Parameters">
+                                <span class="sidebar-mini"> GR </span>
+                                <span class="sidebar-normal"> Grade </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="" asp-controller="Parameters">
+                                <span class="sidebar-mini"> NC </span>
+                                <span class="sidebar-normal"> Nature of Contract </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="TaxDefinition" asp-controller="Parameters">
+                                <span class="sidebar-mini"> TD </span>
+                                <span class="sidebar-normal"> Tax Table </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="TerminationReasons" asp-controller="TerminationReason">
+                                <span class="sidebar-mini"> TR </span>
+                                <span class="sidebar-normal"> Termination Reason </span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="" asp-controller="Parameters">
+                                <span class="sidebar-mini"> IR </span>
+                                <span class="sidebar-normal"> Increase Reason </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="Department" asp-controller="Parameters">
+                                <span class="sidebar-mini"> DP </span>
+                                <span class="sidebar-normal"> Department </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="DeductionLines" asp-controller="PayslipDefinition">
+                                <span class="sidebar-mini"> DL </span>
+                                <span class="sidebar-normal"> Deduction Lines </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="EarningLines" asp-controller="PayslipDefinition">
+                                <span class="sidebar-mini"> EL </span>
+                                <span class="sidebar-normal"> Earning Lines </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-action="LeaveTypes" asp-controller="LeaveManagement">
+                                <span class="sidebar-mini"> LT </span>
+                                <span class="sidebar-normal"> Leave Types </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+

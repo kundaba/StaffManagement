@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content" ng-app="myapp" ng-controller="employeeListController">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">Employee List</h5>
+
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        <a asp-action="NewEmployee" asp-controller="Employee">
+
+                            <button type="button" value="Add" rel="tooltip" class="button btn btn-info btn-md pull-right" data-toggle="modal">
+                                <i class="material-icons">person_add</i>New Employee
+                            </button>
+                        </a>
+                        
+                        <a asp-action="Finder" asp-controller="EmployeeFinder">
+                            <button type="button" class="btn btn-info btn-md employeeSearchBtn"> <i class="fas fa-search"></i>Find Employees </button>
+                        </a>
+                        <div class="col-md-3" style="margin-right: 10px">
+                            <input type="text" class="form-control" ng-model="search.$" placeholder="Search" style="margin-right: 10px">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="material-datatables">
+                        <table id="datatable" class="table table-striped" data-order='[[ 0, "desc" ]]'  width="100%" style="width:100%; font-size:small;font-family:'Century Gothic', Times, serif">
+                            <thead>
+                            <tr class="">
+                                <th>Employee Code</th>
+                                <th>First Name </th>
+                                <th>Last Name </th>
+                                <th>Job Title </th>
+                                <th>Date Engaged </th>
+                                <th>Status </th>
+                                <th><center> Action </center></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in result | filter:search">
+                                <td>{{item.employeeCode}}</td>
+                                <td>{{item.firstName}}</td>
+                                <td>{{item.lastName}}</td>
+                                <td>{{item.jobTitle}}</td>
+                                <td>{{item.dateEngaged | date:'dd MMM yyyy'}}</td>
+                                <td>{{item.employeeStatus}}</td>
+                                <td>
+                                    <center>
+                                        <a href="/Employee/Details?employeeCode={{item.employeeCode}}">
+                                            <button class="btn btn-primary btn-sm">View Details </button>
+                                        </a>
+                                    </center>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/jquery/jquery.js"></script>
+<script src="~/angularjs/angular.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script src="~/CustomJS/employee/employeeList.js"></script>
+

@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewData["Title"] = "NewEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/bootstrap/normalbootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<div class="wizard-container">
+    <div class="card card-wizard" data-color="rose" id="wizardProfile">
+        <form action="#" method="post">
+            <div class="card-header text-center">
+                <h5 class="card-title">
+                    New Employee
+                </h5>
+                <p>Complete the form to add a new employee </p>
+            </div>
+            <div class="">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="file" class="form-control employeeTakeOnUpload" name="employeeTakeOnUpload" id="file" placeholder="select file" required/>
+                        </td>
+                        <td>
+                            <input type="button" class="form-control btn btn-info btn-sm" id="bulkTakenOn" value="Bulk Take-on" />
+                        </td>
+                    </tr>
+                </table>
+            </div><br/>
+            
+            <div class="wizard-navigation">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#personalInfo" data-toggle="tab" role="tab">
+                            Personal Details
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#jobDetails" data-toggle="tab" role="tab">
+                            Job Details
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contactDetails" data-toggle="tab" role="tab">
+                            Contact Details
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bankDetails" data-toggle="tab" role="tab">
+                            Bank Details
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                    <partial name="PartialViews/PersonalInformation.cshtml" />
+                    <partial name="PartialViews/JobDetails.cshtml" />
+                    <partial name="PartialViews/ContactDetails.cshtml" />
+                    <partial name="PartialViews/BankDetails.cshtml" />
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="mr-auto">
+                    <input type="button" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous"  value="Previous">
+                </div>
+                <div class="ml-auto">
+                    <input type="button" class="btn btn-next btn-fill btn-rose btn-wd" name="next" value="Next">
+                    <input type="button" class="btn btn-finish btn-fill btn-success btn-wd submitButton" name="finish" value="Submit" style="display: none;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="processingProgress" style="display:none;width:80px;height:89px;border:0px solid black;position:absolute;top:20%;left:45%;padding:2px;">
+    <img src="~/img/demo_wait.gif" width="80" height="80"  alt=""/><br><b class="text-primary" style="font-size:medium">Processing Your Request Please wait..</b>
+</div>
+
+<script src="~/jquery/jquery.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script src="~/CustomJS/CustomWizardInitializer.js"></script>
+<script src="~/CustomJS/LookupData.js"></script>
+<script src="~/CustomJS/employee/NewEmployee.js"></script>
+<script src="~/bootstrap/normalbootstrap/js/bootstrap.js"></script>
+
+

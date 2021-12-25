@@ -1,0 +1,101 @@
+﻿
+<div class="modal fade" id="qualificationUploadModal" tabindex="-1">
+    <div class="modal-dialog modal-lg" style="max-width: 85% !important;" role="document">
+        <div class="modal-content mb-5">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px">
+                    <u> Supporting Documents </u><span id="refNo"></span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-danger">&times;</span>
+                </button>
+                <hr/>
+            </div>
+
+            <div class="modal-body p-b-0 mb-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="wizard" id="app-s7">
+                            <section>
+                                <form class="wizard-form" id="application-form">
+                                    <fieldset>
+                                        <div class="fields">
+                                            <table class="table qualificationUploadTable" width="100%">
+                                                <tr class="qualificationUploadTableRow">
+                                                    <td>
+                                                        <label>
+                                                            Document Type
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <select class="form-control documentType" id="documentType" data-live-search="true">
+                                                            <option value="" selected disabled>Select Doc Type </option>
+                                                            <option value="Academic">Academic </option>
+                                                            <option value="Non-Academic">Non-Academic </option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="qualificationType" style="display: none">
+                                                        <label>
+                                                            Qualif. Type
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <select class="form-control qualificationType" id="qualificationType" data-live-search="true">
+                                                            <option value="" selected disabled>Select type </option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="fieldOfStudy" style="display: none">
+                                                        <label for="fieldOfStudy" class="block">
+                                                            Field of study
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <input id="fieldOfStudy" type="text" class=" form-control fieldOfStudy" placeholder="e.g Computer Science" minlength="5" maxlength="20"/>
+                                                    </td>
+
+                                                    <td class="startDate">
+                                                        <label for="startDate" class="block">
+                                                            Date of issue
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <input id="startDate" type="text" class=" form-control docDate"
+                                                               placeholder="Enter date of issue" required/>
+                                                    </td>
+                                                    <td class="endDate">
+                                                        <label for="endDate" class="block">
+                                                            Expiry Date
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <input id="endDate" type="text" class=" form-control docDate"
+                                                               placeholder="Enter end date" required/>
+                                                    </td>
+                                                    <td class="endDate">
+                                                        <label for="endDate" class="block">
+                                                            Select Document
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <input id="document" type="file" name="document" class=" form-control document"
+                                                               placeholder="Select file" required/>
+                                                    </td>
+                                                    <td>
+                                                        <center>Action</center>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-lg-end">
+                <button type="button" class="btn btn-sm btn-info addBtn waves-effect mr-2 "><i class="fa fa-plus-circle"></i>Add More</button>
+                <button type="button" class="btn btn-sm btn-success submitBtn waves-effect mr-2" onclick="uploadQualifications()">Upload</button>
+                <button type="button" class="btn btn-danger waves-effect mr-3 btn-sm"
+                        data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

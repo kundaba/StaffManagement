@@ -1,0 +1,126 @@
+﻿<div class="tab-pane active" id="personalInfo">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Employee No :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control" id="employeeCode" name="employeeCode" style="text-transform: uppercase" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    First Name :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control" id="firstname" name="firstname" maxlength="15" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">Second Name : </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control" id="secondname" name="secondname" maxlength="15">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Last Name :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="text" class="form-control" id="lastname" name="lastname" maxlength="15" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Gender :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <select class="selectpicker form-control gender" name="gender" id="gender" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                            <option disabled selected>Select Gender</option>
+                            <option value="M">Male </option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Date of Birth :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="date" class="form-control" id="dob" name="dob" max="@DateTime.Now.ToString("yyyy-MM-dd")" placeholder="Date of birth" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Identity Type :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <select id="IDType" name="IDType" class="selectpicker form-control IDType" data-style="btn btn-primary btn-sm" data-live-search="true" required>
+                            <option disabled selected>Select Identity Type </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    National ID :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <input type="number" min="0" class="form-control" id="employeeId" name="employeeId" maxlength="9" minlength="9" required onchange="validateNrc($(this).val())">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Nationality :
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <select id="nationality" name="nationality" class="selectpicker form-control nationality" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                            <option disabled selected>Select Nationality </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-md-3 col-form-label">
+                    Marital Status:
+                    <span class="text-danger">*</span>
+                </p>
+                <div class="col-md-9">
+                    <div class="form-group has-default">
+                        <select id="maritalStatus" name="maritalStatus" class="selectpicker form-control maritalStatus" data-live-search="true" data-style="btn btn-primary btn-sm" required>
+                            <option disabled selected>Select Marital Status </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿
+         
+            <!--- CREATE POSITION CODE MODAL --->
+            <div class="modal fade" id="CreatePositionCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="max-width: 60% !important;">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title"><b class="modalTitle">  </b></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="material-icons text-danger">clear</i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group bmd-form-group is-filled">
+                                
+                                <label class="label-control">Template </label>
+                                <input type="text" class="form-control " id="jobTitleCode" style="text-transform:uppercase;text-align:left" placeholder="enter department code" readonly>
+
+                                <label class="label-control">Number of PositionCodes </label>
+                                <input type="number" class="form-control" id="numOfPositionCodes" onchange="createPositionCodes()" placeholder="enter number of positions" min="1" max="20" required>
+                                
+                                <textarea id ="positionCodes" maxlength="90" class="comments form-control" cols="500" readonly style="display: none">
+                                 </textarea>
+                             
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success waves-effect mr-2   btn-sm addPositionCodesBtn"  style="display: none">Submit</button>
+                            <button type="button" class="btn btn-danger  waves-effect mr-2  btn-sm" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>

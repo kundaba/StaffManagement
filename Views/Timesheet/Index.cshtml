@@ -1,0 +1,84 @@
+﻿
+@model IEnumerable<CDFStaffManagement.Services.Timesheet.Dto.TimesheetDto>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card " style="width:auto">
+                <div class="card-header card-header-text card-header-info">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">Unapproved Timesheets </h5>
+                </div>
+                <div class="card-body">
+
+                    <br/>
+                    <div class="material-datatables">
+                        <div>
+                                <button type="button" class="btn btn-info btn-sm historyBtn" onclick="loadTimesheetHistoryModal()"><i class="fa fa-history"></i> History Timesheets </button>
+                                @if (Model.Any())
+                                {
+                                <button type="button" class="btn btn-success btn-sm approveBtn" value="Approved" onclick="approveTimesheet($(this).val())">Approve </button>
+                                <button type="button" class="btn btn-danger btn-sm approveBtn" value="Rejected" onclick="approveTimesheet($(this).val())">Reject </button>
+                                }
+                            </div>
+                      
+                       <table id="datatables" class="table  table-hover" data-order='[[ 0, "desc" ]]' style="width:100%; margin-left:10px; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr>
+                                <th><center><input type="checkbox" class="form-check-input" id="CheckAll" onclick="checkAll()"/> Select All </center></th>
+                                <th> Employee No. </th>
+                                <th> First Name </th>
+                                <th> Last Name </th>
+                                <th> Hours Worked</th>
+                                <th> Date Worked </th>
+                                <th> D. Submitted </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="tblRow">
+                                    <td><center><input type="checkbox" name="records" class="form-check-input records" id="id" value="@item.Id"/></center></td>
+                                    <td >
+                                        @item.EmployeeCode
+                                    </td>
+                                    <td>
+                                        @item.FirstName
+                                    </td>
+                                    <td>
+                                        @item.LastName
+                                    </td>
+                                    <td>
+                                        @item.HoursWorked
+                                    </td>
+                                    <td>
+                                        @{
+                                            var date = (DateTime)item.DateWorked;
+                                            var convertDate = date.ToString("d MMM, yyyy");
+                                            @convertDate
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            var dat = (DateTime)item.DateCreated;
+                                            var convertDat = dat.ToString("d MMM, yyyy");
+                                            @convertDat
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="PartialViews/HistoryTimesheetPartial"/>
+<script src="~/jquery/jquery.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/CustomJS/timesheet/approveTimesheet.js"></script>
+<script src="~/CustomJS/timesheet/timesheetHistory.js"></script>

@@ -1,0 +1,49 @@
+﻿
+<link href="~/bootstrap/normalbootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card " style="width:auto">
+                <div class="card-header card-header-text card-header-info">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">Disciplinary Cases </h5>
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        <button type="button"  rel="tooltip" class="button btn btn-info btn-sm pull-right" onclick="loadCaseSubmissionModal()" >
+                            <i class="material-icons">add</i>Add Disciplinary case
+                        </button>
+                    </div><br>
+                    <br/>
+                    <div class="material-datatables">
+                        <table id="datatable" class="table  table-hover" data-order='[[ 0, "desc" ]]' style="width:100%; margin-left:10px; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr >
+                                <th class="d-none"> Case Id </th>
+                                <th> Employee No. </th>
+                                <th> First Name </th>
+                                <th> Last Name </th>
+                                <th> Date Created </th>
+                                <th> Action </th>
+                            </tr>
+                            </thead>
+                            <tbody class="dTBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="PartialViews/DisciplinaryCaseSubmissionPartial"/>
+<partial name="PartialViews/DisciplinaryCaseDetailsPartial"/>
+
+<script src="~/jquery/jquery.js"></script>
+<script src="~/bootstrap/normalbootstrap/js/bootstrap.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/CustomJS/disciplinaryCases/addDisciplinaryCase.js"></script>
+<script src="~/CustomJS/disciplinaryCases/getDisciplinaryCases.js"></script>

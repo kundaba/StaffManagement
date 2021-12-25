@@ -1,0 +1,163 @@
+﻿@model IEnumerable<CDFStaffManagement.Services.Parameters.PayrollEarningLine>
+@{
+    ViewData["Title"] = "CreateEmployeeEarningDef";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <script src="~/jquery/jquery.js"></script>
+    <script src="~/CustomJS/Search.js"></script>
+  <div class="card pull-right">
+    <div class="card-header card-header-rose card-header-text">
+    </div>
+    <div class="card-body searchDiv">
+        <div>
+            <input type="text" class="form-control" style="max-width:unset; height:40px;font-size:30px;"
+                   placeholder="Search for employee here.." id="search" required />
+            <br />
+            <button type="button"  rel="tooltip" class="button btn btn-info btn-sm pull-right DeductionsDefBtn" data-toggle="modal">
+                <i class="material-icons">contacts</i>Add Deductions
+            </button>
+    </div>
+</div>
+<br />
+
+<div class="card ">
+    <div class="card-header card-header-primary ">
+        <div class="card-icon">
+            <i class="material-icons">contacts</i>
+        </div>
+        <h4 class="card-title">Earning Lines</h4>
+    </div>
+    <div class="col-md-12">
+        <div class="card-body " >
+            <table id="earningsDatatable" class="table  table-hover table-borderless" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:Georgia, 'Times New Roman', Times, serif">
+                <thead>
+                    <tr class="">
+                        <th>Code</th>
+                        <th>Description </th>
+                        <th>Type</th>
+                        <th><center>Value </center></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="earningstblRow">
+                            <td> @item.EarningLineCode</td>
+                            <td> @item.EarningLineDescription</td>
+                            <td>
+                                <select class="form-control selectpicker type" id="type" name="type" data-style="btn btn-secondary">
+                                    <option selected disabled>Select Type</option>
+                                    <option value="Percentage">Percentage</option>
+                                    <option value="FixedAmount">Fixed Amount</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control earningValue" id="earningValue" name="earningValue" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer ">
+        <button type="submit" class="btn btn-fill btn-rose btn-sm SubmitButton">Submit</button>
+    </div>
+    <partial name="PartialViews/_DeductionsDefinitions" />
+</div>
+</div>
+@*<div id="processingProgress" style="display:none;width:80px;height:89px;border:0px solid black;position:absolute;top:20%;left:45%;padding:2px;">
+    <img src='~/img/demo_wait.gif' width="80" height="80" /><br><b class="text-primary" style="font-size:medium">Processing Your Request Please wait..</b>
+</div>*@
+
+<script>
+    $(document).ready(function () {
+
+        $('.DeductionsDefBtn').click(function () {
+            $('#DeductionDefModal').modal('show');
+        })
+
+        $('#earningsDatatable tr').each(function () {
+            
+            $(this).find("input[name ='type']").each(function () {
+                let type = $(this).val();
+
+                $('.earningValue').blur(function () {
+                    let value = $(this).val();
+
+                    if ((type === 'Percentage') && (value <= 0 || value > 100)) {
+                        systemResponse('Enter Value between 1 and 100');
+                    }
+                    if (type === 'FixedAmount' && (value <= 50)) {
+                        systemResponse('Enter Value above 50');
+                    }
+                });
+            });           
+        });
+      
+        $('.SubmitButton').click(function () {
+            
+            let earningLineCode = [];
+            let earningType = [];
+            let earningValue = [];
+            let dataObj = {};
+            let category = 'earnings';
+
+            $('#earningsDatatable tr.earningstblRow').each(function () {
+                let code = $.trim($(this).closest('tr').find('td:eq(0)').text());
+                earningLineCode.push(code);         
+            });
+
+            $('.type').each(function () {
+                earningType.push($(this).val());  
+            });
+
+            $('.earningValue').each(function () {
+                earningValue.push($(this).val());
+            });
+
+            if (earningValue.length > 0 && earningType.length > 0) {
+
+                dataObj = {
+                    "Code": earningLineCode,
+                    "Type": earningType,
+                    "EarningValue": earningValue,
+                    "Category": category,
+                    "EmployeeCode": $.trim($(".employeeCode").val()?.split(" ")[0])
+                };
+
+                submitData(dataObj);
+            }
+        });
+
+        let submitData = function (dataObject) {
+            $('#processingProgress').css('display', 'block');
+            $('.btn').prop('disabled', true);
+
+            $.post('/PayslipDefinition/CreatePayslipDefinitionDetail', { model: dataObject })
+                .done(function (data) {
+                    $('#processingProgress').css('display', 'none');
+                    $('.btn').prop("disabled", false);
+                    systemResponse(data);
+                })
+                .fail(function (error) {
+                    $("#processingProgress").css('display', 'none');
+                    systemResponse(error.responseText);
+                });
+        }
+
+        let  systemResponse = function (msg) {
+            swal({
+                title: 'ERROR',
+                text: msg,
+                type: 'error',
+                buttonsStyling: false,
+                confirmButtonClass: 'btn btn-info okBtn',
+                allowOutsideClick: false
+            });
+        }
+    })
+</script>
+
+

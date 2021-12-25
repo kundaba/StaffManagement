@@ -1,0 +1,81 @@
+﻿
+            <!---FORMULA CREATION MODAL -->
+            <div class="modal fade" id="FormulaCreationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="max-width: 40% !important;">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title" style="margin-bottom: 25px">
+                                <b class=""><u>Create Formula </u> </b>
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="material-icons text-danger">clear</i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <p class="col-md-3 col-form-label">
+                                        Rate
+                                        <span class="text-danger">*</span>
+                                    </p>
+                                    <div class="col-md-9">
+                                        <div class="form-group has-default">
+                                            <input type="number" class="form-control rate" min="0" placeholder="Enter the rate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-3 col-form-label">
+                                        Units
+                                        <span class="text-danger"></span>
+                                    </p>
+                                    <div class="col-md-9">
+                                        <div class="form-group has-default">
+                                            <select class=" form-control selectpicker units" id="units" data-style="select-with-transition">
+                                                <option value="" selected disabled> Select Units</option>
+                                                <option value="HOURS"> Hours </option>
+                                                <option value="DAYS"> Days </option>
+                                                <option value="MONTHS"> Months </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <p class="col-md-3 col-form-label">
+                                        Operation
+                                        <span class="text-danger">*</span>
+                                    </p>
+                                    <div class="col-md-9">
+                                        <div class="form-group has-default">
+                                            <select class=" form-control selectpicker operation"  data-style="select-with-transition" onchange="createFormula($(this).val())">
+                                                <option value="" selected disabled> Select Operation</option>
+                                                <option value="x"> Multiplication </option>
+                                                <option value="/"> Division </option>
+                                                <option value="+"> Plus </option>
+                                                <option value="-"> Minus </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-3 col-form-label">
+                                        Formula
+                                        <span class="text-danger"></span>
+                                    </p>
+                                    <div class="col-md-9">
+                                        <div class="form-group has-default">
+                                            <input type="text" class="form-control constructedFormula" placeholder="constructed formula" readonly="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success btn-md mr-2 addFormula" onclick="saveFormula()">Save</button>
+                            <button type="button" class="btn btn-danger btn-md mr-2" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>

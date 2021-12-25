@@ -1,0 +1,112 @@
+﻿@model IEnumerable<CDFStaffManagement.Services.NapsaConfiguration.NapsaConfigurationDto>
+
+@{
+    ViewData["Title"] = "Configurations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title">NAPSA Configurations</h5>
+
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        <button type="button" value="Add" rel="tooltip" class="button btn btn-info btn-sm pull-right addBtn" data-toggle="modal">
+                            <i class="material-icons">add</i>New Record
+                        </button>
+                    </div>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table table-striped" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr class="">
+                                <th> Percentage </th>
+                                <th>Ceiling(ZMW) </th>
+                                <th>Start Date </th>
+                                <th>End Date </th>
+                                <th>Sub. Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model) {
+                                   <tr>
+                                       <td>
+                                           @Html.DisplayFor(modelItem => item.Percentage)
+                                       </td>
+                                       <td>
+                                           @Html.DisplayFor(modelItem => item.MaximumCeiling)
+                                       </td>
+                                       <td>
+                                           @{
+                                               var d = item.StartDate;
+                                               var startDate = d.ToString("MMMM d, yyyy");
+                                           }
+                                           @startDate
+                                       </td>
+                                       <td>
+                                           @{
+                                               var ed = item.EndDate;
+                                               var endDate = ed?.ToString("MMMM d, yyyy");
+                                           }
+                                           @endDate
+                                       </td>
+                                       <td>
+                                           @{
+                                               var dc = item.CreatedDate;
+                                               var createdDate = dc.ToString("MMMM d, yyyy");
+                                           }
+                                           @createdDate
+                                       </td>
+                                       
+                                   </tr>
+                           }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="AddRecordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title" style="margin-bottom: 25px"><b class="modalTitle"> Add New Napsa Line </b></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="material-icons">clear</i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group bmd-form-group is-filled">
+                                <label class="label-control"> Percentage </label>
+                                <input type="number" id="percentage" class="form-control percentage" min="0" max="100">
+                               <br>
+                                <label class="label-control">Ceiling(ZMW) </label>
+                                <input type="number" id="ceiling" class="form-control ceiling">
+                                <br>
+                                <label class="label-control">Start Date </label>
+                                <input type="text" id="startDate" class=" form-control datepicker startDate">
+                               
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success mr-2 btn-sm SubmitBtn">Create Line</button>
+                            <button type="button" class="btn btn-danger mr-2 btn-sm" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/jquery/jquery.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/CustomJS/NapsaConfiguration.js"></script>

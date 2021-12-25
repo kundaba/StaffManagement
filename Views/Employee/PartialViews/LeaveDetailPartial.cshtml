@@ -1,0 +1,39 @@
+﻿
+<!-- EMPLOYEE LEAVE ENTITLEMENT MODAL -->
+<div class="modal fade" id="leaveEntitlementDetailsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 60% !important;">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px">
+                    <b class="modalTitle"> Leave Entitlement Details </b>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row col-12">
+
+                    <div class="col-md-12">
+                        <table class="table leaveEntitlementTable table-striped col-lg-12" data-order='[[ 0, "desc" ]]' style="width:100%; font-size:small;font-family:'Times New Roman', Times, serif">
+                            <thead>
+                            <tr class="bg-grey">
+                                <th> Start Date </th>
+                                <th> Leave Type </th>
+                                <th> Entitlement </th>
+                                <th> Balance </th>
+                                <th> Monetary Value(ZMW) </th>
+                            </tr>
+                            </thead>
+                            <tbody class="leaveEntitlementTbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger waves-effect mr-2 btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

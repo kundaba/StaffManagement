@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content" ng-app="myapp" ng-controller="jobCodesController">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h5 class="card-title"> Position Codes </h5>
+                </div>
+                <div class="card-body">
+                    <br>
+                    <div class="material-datatables">
+                        <table id="datatable" class="table table-striped" data-order='[[ 0, "desc" ]]'  width="100%" style="width:100%; font-size:small;font-family:'Century Gothic', Times, serif">
+                            <thead>
+                            <tr class="">
+                                <th>Code</th>
+                                <th>Description </th>
+                                <th>Grade </th>
+                                <th>Department </th>
+                                <th>Emp. Code</th>
+                                <th>Emp. Name</th>
+                                <th>Reports To </th>
+                                <th>Status </th>
+                                <th><center> Action </center></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in result track by $index">
+                                <td>{{item.positionCode}}</td>
+                                <td>{{item.longDescription}}</td>
+                                <td>{{item.jobGrade}}</td>
+                                <td>{{item.department}}</td>
+                                <td>{{item.employeeCode}}</td>
+                                <td>{{item.employeeName}}</td>
+                                <td>{{item.reportsToPosition}}</td>
+                                <td>{{item.status}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons">build</i>Action </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect EditBtn" onclick="showLinkPositionToSupervisorModal($(this))"><i class="material-icons">edit</i> Link to Supervisor </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- link position to supervisor -->
+<div class="modal fade" id="linkPositionToSupervisorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 65% !important;">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px"><u>Link position to supervisor </u></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row col-12">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <p class="col-md-3 col-form-label">
+                                Position Code
+                                <span class="text-danger"></span>
+                            </p>
+                            <div class="col-md-9">
+                                <div class="form-group has-default">
+                                    <input type="text" class="form-control" id="posCode" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <p class="col-md-3 col-form-label">
+                                Reports To
+                                <span class="text-danger"></span>
+                            </p>
+                            <div class="col-md-9 searchDiv">
+                                <div class="form-group has-default">
+                                    <input type="text" class="form-control allPositionCodes" id="positionCode" placeholder="Enter reports-to position">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect mr-2  btn-sm " onclick="linkPositionToSupervisor()" >Link </button>
+                <button type="button" class="btn btn-danger waves-effect mr-2  btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/jquery/jquery.js"></script>
+<script src="~/angularjs/angular.js"></script>
+<script src="~/CustomJS/CheckUserSession.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/CustomJS/positionCodes/positionCodesList.js"></script>

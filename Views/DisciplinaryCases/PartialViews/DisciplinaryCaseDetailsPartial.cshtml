@@ -1,0 +1,89 @@
+﻿
+
+<div class="modal fade" id="disciplinaryCaseDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:75% !important;">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" style="margin-bottom: 25px"><b><u> Disciplinary Case Details </u></b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons text-danger">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group bmd-form-group is-filled">
+                    <div class="row col-12">
+                        
+                        <!----first half--->
+                        <div class="col-md-6">
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Date offence committed
+                                    <span class="text-danger"></span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                        <input type="text" class="form-control dateOfOffence"  readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Case Type
+                                    <span class="text-danger"></span>
+                                </p>
+                                <div class="col-md-9">
+                                 <input type="text" class="form-control caseType" readonly>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!----second half--->
+                        <div class="col-md-6">
+
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Category
+                                    <span class="text-danger"></span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                     <input type="text" class="form-control category" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <p class="col-md-3 col-form-label">
+                                    Outcome
+                                    <span class="text-danger"></span>
+                                </p>
+                                <div class="col-md-9">
+                                    <div class="form-group has-default">
+                                    <input type="text" class="form-control outCome" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-----text area------>
+                    <div class="col-sm-12 col-lg-12">
+                        <p>
+                            Case Description(Details) <span class="text-danger"></span>
+                            <textarea class="form-control caseDescription"  cols="500" readonly >                                                                                      
+                         </textarea>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger  waves-effect mr-2  btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<partial name="PartialViews/_DeductionsDefinitions" />
+<partial name="PartialViews/_EarningsDefinitions" />
+<partial name="PartialViews/TimesheetHoursPartial" />
+<div class="card pull-right">
+    <div class="card-header card-header-rose card-header-text">
+    </div>
+    <div class="card-body searchDiv">
+        <div>
+            <input type="text" class="form-control employeeCode" style="max-width:unset; height:40px;font-size:30px; text-transform: uppercase"placeholder="Search for employee here.." id="search" required/><br/>
+
+            <button class="btn btn-primary btn-md dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons">build</i>Actions </button>
+            <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect  payslipDetailsBtn"><i class="fa fa-search-plus"></i>Get Payslip Details</a>
+                @{
+                    var today = DateTime.Now.Day;
+                    if (today < 25)
+                    {
+                        <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect  EarningsBtn"><i class="material-icons">add</i> Add Earnings </a>
+                        <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect  DeductionsDefBtn"><i class="material-icons">add</i> Add Deductions </a>
+                        <a href="javascript:void(0)" class="dropdown-item waves-light waves-effect  timesheetBtn" onclick="loadTimesheetModal()"><i class="material-icons">add</i> Add Timesheet </a>
+                    }
+                }
+            </div>
+        </div>
+        
+        <br><br>
+        <div class="col-lg-12 earningsAndDeductionsDiv" style="display: none">
+            <div class="row col-lg-12">
+                <div class="col-md-12 col-lg-12">
+                    <div class="card col-lg-12">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                <u>Earnings</u>
+                            </h5>
+                        </div>
+                        <div class="card-body col-lg-12">
+                            <div class="material-datatables col-lg-12">
+                                <table id="earnings" class="table table-striped col-lg-12" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Century Gothic', Times, serif">
+                                    <thead>
+                                    <tr class="">
+                                        <th> Code </th>
+                                        <th>Description</th>
+                                        <th>Type </th>
+                                        <th>Value </th>
+                                        <th>Amount </th>
+                                        <th>Action </th>  
+                                        <th class="d-none">DefinitionType </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="earningsTbody">
+
+                                    </tbody>
+                                </table>
+
+                                <div class="row">
+                                    <label class="text-primary">Total Earnings : K <b id="totalEarnings"></b></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-12">
+                    <div class="card col-lg-12">
+                        <div class="card-header">
+                            <u>
+                                <h5 class="card-title">Deductions </h5>
+                            </u>
+                        </div>
+                        <div class="card-body col-lg-12">
+                            <div class="material-datatables">
+                                <table id="deductions" class="table table-striped" data-order='[[ 0, "desc" ]]' cellspacing="0" width="100%" style="width:100%; font-size:small;font-family:'Century Gothic', Times, serif">
+                                    <thead>
+                                    <tr class="">
+                                        <th>Code </th>
+                                        <th>Description</th>
+                                        <th>Type </th>
+                                        <th>Value </th>
+                                        <th>Amount </th>
+                                        <th>Action </th>
+                                        <th class="d-none">DefinitionType </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="deductionsTbody">
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <label class="text-primary">Total Deductions : K <b id="totalDeductions"></b></label>
+                                </div> <br> 
+                                <div class="row">
+                                    <label class="text-success">NET PAY : K <b id="netPay"></b></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+
+<div id="processingProgress" style="display:none;width:80px;height:89px;border:0px solid black;position:absolute;top:20%;left:45%;padding:2px;">
+    <img src="~/img/demo_wait.gif" width="80" height="80"  alt=""/><br><b class="text-primary" style="font-size:medium">Processing Your Request Please wait..</b>
+</div>
+<script src="~/jquery/jquery.js"></script>
+<script src="~/CustomJS/payrollDefinitions/EarningLineDefinition.js"></script>
+<script src="~/CustomJS/payrollDefinitions/DeductionLineDefinition.js"></script>
+<script src="~/CustomJS/ResponseAlert.js"></script>
+<script src="~/CustomJS/payrollDefinitions/PayslipDetails.js"></script>
+<script src="~/CustomJS/payrollDefinitions/PayslipDefinitionUpload.js"></script>
+<script src="~/CustomJS/timesheet/addTimesheetHours.js"></script>
+<script>
+    $(document).ready(function () {
+        
+        $('.EarningsBtn').click(function () {
+            
+              $('.earningsTbody').empty();
+              $('.deductionsTbody').empty();
+             let employee = $('#search').val();
+                   
+            if (employee ===''){ 
+            swal({
+                            title: 'Error',
+                            text: 'Please provide the employee details',
+                            type: 'error',
+                            buttonsStyling: false,
+                            confirmButtonClass: 'btn btn-info okBtn',
+                            allowOutsideClick: false
+                        }); 
+            return;
+            }              
+            $('.earningValue').val('');
+             $('.employeeName').text(employee);
+            $('#EarningDefModal').modal('show').modal({backdrop: 'static', keyboard: false});;
+        });
+        
+        $('.DeductionsDefBtn').click(function () {
+            
+             let employee = $('#search').val();
+               $('.earningsTbody').empty();
+               $('.deductionsTbody').empty();
+                    
+            if (employee === ''){
+                swal({
+                                title: 'Error',
+                                text: 'Please provide the employee details',
+                                type: 'error',
+                                buttonsStyling: false,
+                                confirmButtonClass: 'btn btn-info okBtn',
+                                allowOutsideClick: false
+                            }); 
+                return;
+            }
+            $('.deductionValue').val('');
+            $('#employeeCode').text(employee);
+            $('#DeductionDefModal').modal('show').modal({backdrop: 'static', keyboard: false});;
+        })
+    })
+</script>
+
+
